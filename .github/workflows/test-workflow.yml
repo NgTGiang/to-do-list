@@ -1,0 +1,23 @@
+name: Test
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+    inputs:
+      ENV:
+        type: choice
+        required: true
+        description: 'Please, choose environment:'
+        default: 'qa'
+        options:
+          - 'qa'
+          - 'dev'
+          - 'ct'
+          - 'prod'
+
+jobs:
+  test-summary:
+    runs-on: ubunto-latest
+    steps:
+      - run: echo "Get value from ${{github.event.inputs.ENV}}"
